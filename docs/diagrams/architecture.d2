@@ -1,0 +1,62 @@
+direction: right
+
+Discord: {
+  shape: cylinder
+
+}
+
+Riot Games API: {
+  shape: cloud
+
+}
+
+Koga Bot (Node.js): {
+  shape: package
+  
+  Discord Client: {
+    shape: rectangle
+  }
+  
+  Command Handler: {
+    shape: rectangle
+  }
+  
+  Polling Worker: {
+    shape: rectangle
+  }
+  
+  Riot API Service: {
+    shape: rectangle
+  }
+  
+  History Engine: {
+    shape: rectangle
+  }
+  
+  Database Service: {
+    shape: rectangle
+  }
+  
+  Discord Client -> Command Handler: Slash Commands
+  Command Handler -> Database Service: Config/Vincular
+  Command Handler -> History Engine: /comparativo
+  
+  Polling Worker -> Database Service: Get Tracked Players
+  Polling Worker -> Riot API Service: Check New Matches
+  Riot API Service -> History Engine: Match Data
+  History Engine -> Discord Client: Send Notification
+}
+
+SQLite Database: {
+  shape: cylinder
+
+}
+
+Discord -> Koga Bot.Discord Client: Webhooks/Events
+Koga Bot.Discord Client -> Discord: Messages/Embeds
+
+Koga Bot.Riot API Service -> Riot Games API: HTTP GET (ACCOUNT-V1, MATCH-V5)
+Riot Games API -> Koga Bot.Riot API Service: JSON Data
+
+Koga Bot.Database Service -> SQLite Database: Read/Write
+SQLite Database -> Koga Bot.Database Service: Results

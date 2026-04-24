@@ -1,0 +1,33 @@
+direction: right
+
+actor User
+participant Discord
+participant Koga Bot
+participant SQLite
+participant Riot API
+
+User -> Discord: /vincular Nome#Tag
+Discord -> Koga Bot: InteractionCreate (vincular)
+Koga Bot -> Riot API: GET /riot/account/v1/accounts/by-riot-id/Nome/Tag
+Riot API --> Koga Bot: PUUID
+Koga Bot -> SQLite: INSERT INTO tracked_players (puuid, guild_id)
+SQLite --> Koga Bot: Success
+Koga Bot --> Discord: Embed (Jogador vinculado)
+Discord --> User: Mensagem de sucesso
+
+note: A cada 5 minutos
+Koga Bot -> SQLite: SELECT * FROM tracked_players
+SQLite --> Koga Bot: List of Players
+loop For each player
+  Koga Bot -> Riot API: GET /lol/match/v5/matches/by-puuid/puuid/ids
+  Riot API --> Koga Bot: Match IDs
+  alt New Match Found
+    Koga Bot -> Riot API: GET /lol/match/v5/matches/matchId
+    Riot API --> Koga Bot: Match Data
+    Koga Bot -> Koga Bot: HistoryEngine.analyze(Match Data)
+    Koga Bot -> SQLite: SELECT notification_channel_id FROM guild_configs
+    SQLite --> Koga Bot: Channel ID
+    Koga Bot -> Discord: Send Message (Análise Histórica Irônica)
+    Koga Bot -> SQLite: UPDATE tracked_players SET last_match_id = matchId
+  end
+end

@@ -1,0 +1,35 @@
+direction: right
+
+guild_configs: {
+  shape: sql_table
+  guild_id: TEXT {constraint: primary_key}
+  notification_channel_id: TEXT
+  prefix: TEXT
+  created_at: DATETIME
+  updated_at: DATETIME
+}
+
+tracked_players: {
+  shape: sql_table
+  id: INTEGER {constraint: primary_key}
+  puuid: TEXT {constraint: unique}
+  riot_id_tag: TEXT
+  last_match_id: TEXT
+  guild_id: TEXT {constraint: foreign_key}
+  created_at: DATETIME
+}
+
+match_history: {
+  shape: sql_table
+  id: INTEGER {constraint: primary_key}
+  match_id: TEXT
+  puuid: TEXT {constraint: foreign_key}
+  win: BOOLEAN
+  duration: INTEGER
+  kda: TEXT
+  gold_earned: INTEGER
+  analyzed_at: DATETIME
+}
+
+guild_configs.guild_id -> tracked_players.guild_id: 1..N
+tracked_players.puuid -> match_history.puuid: 1..N

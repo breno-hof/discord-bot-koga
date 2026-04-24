@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  koga-bot:
+    build: .
+    image: ghcr.io/devyor-dot-fun/discord-bot-koga:latest
+    container_name: koga-bot
+    restart: unless-stopped
+    volumes:
+      - ./.env:/app/.env:ro
+      - koga-data:/app/data
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  koga-data:
+    driver: local
