@@ -9,79 +9,179 @@
 // ==========================================
 
 const HISTORICAL_EVENTS = {
-  // Stomps rápidos (< 20 min) — Colapsos súbitos e rendições catastróficas
+  // Stomps rápidos (< 20 min) — Colapsos súbitos e amadorismo gritante
   QUICK_STOMP: [
     {
-      event: 'Batalha de Waterloo (1815)',
-      description: 'Napoleão Bonaparte, outrora senhor da Europa, viu seu exército desintegrar-se em questão de horas por uma combinação fatal de arrogância tática e subestimação do adversário.',
-      lesson: 'A confiança excessiva nas próprias capacidades, sem reconhecer a força do inimigo, é a receita mais antiga para o colapso.',
+      event: 'Guerra Anglo-Zanzibari (1896)',
+      description: 'A guerra mais curta da história durou apenas 38 minutos. O sultanato de Zanzibar achou que poderia desafiar o Império Britânico; o resultado foi uma rendição antes mesmo do chá das cinco estar pronto.',
+      lesson: 'Sua resistência durou menos que o tempo de cozimento de um arroz integral. Um recorde deplorável, até para os seus padrões.',
     },
     {
-      event: 'Queda da Linha Maginot (1940)',
-      description: 'A França investiu décadas e fortunas imensas em uma linha defensiva impenetrável. Os alemães simplesmente a contornaram pelas Ardenas em 46 horas.',
-      lesson: 'Uma estratégia rígida e inflexível, incapaz de adaptar-se ao inimigo, é menos uma fortaleza e mais uma armadilha para si mesmo.',
+      event: 'Batalha de Issus (333 a.C.)',
+      description: 'Dário III tinha a vantagem numérica, o terreno e o dinheiro. Alexandre, o Grande, tinha apenas um plano. Dário fugiu do campo de batalha tão rápido que esqueceu sua própria família para trás.',
+      lesson: 'Ter recursos e não saber usá-los é apenas uma forma cara de passar vergonha. Alexandre agradece a facilidade.',
     },
     {
-      event: 'Batalha de Cannae (216 a.C.)',
-      description: 'Aníbal Barca destruiu oito legiões romanas em uma tarde. Não por superioridade numérica, mas pela incapacidade romana de reconhecer o cerco que se formava ao seu redor.',
-      lesson: 'Quando o inimigo dita o ritmo e a posição do combate, a derrota não é uma possibilidade — é uma certeza matemática.',
+      event: 'A Queda do Império Asteca (1521)',
+      description: 'Uma civilização de milhões foi desmantelada por algumas centenas de espanhóis e uma série de decisões diplomáticas catastróficas de Montezuma.',
+      lesson: 'Ignorar ameaças óbvias enquanto foca em rituais inúteis é um erro clássico. Você o replicou com uma perfeição irritante.',
+    },
+    {
+      event: 'A Quarta Cruzada (1204)',
+      description: 'Os cruzados saíram para libertar Jerusalém, mas ficaram sem dinheiro, se perderam e decidiram saquear Constantinopla — uma cidade aliada. O caos foi tão absoluto que o objetivo original foi esquecido em semanas.',
+      lesson: 'Perder o foco do objetivo principal para se perder em lutas laterais sem sentido: a história chama de tragédia, eu chamo de sua gameplay.',
+    },
+    {
+      event: 'Batalha de Agincourt (1415)',
+      description: 'A cavalaria francesa, pesada e arrogante, avançou por um campo de lama apenas para ser massacrada por arqueiros galeses em posição estática.',
+      lesson: 'A pressa em morrer é a única coisa que superou sua falta de visão de mapa nesta partida.',
+    },
+    {
+      event: 'O Grande Emigre (1792)',
+      description: 'A aristocracia francesa achou que o exército prussiano resolveria seus problemas em dias. Foram varridos da história antes que pudessem arrumar as malas.',
+      lesson: 'Esperar que terceiros salvem sua rota é um anacronismo tático que a história já puniu mil vezes.',
+    },
+    {
+      event: 'Batalha de Panipat (1761)',
+      description: 'O Império Marata esticou demais suas linhas de suprimento e foi aniquilado em um único ataque frontal coordenado.',
+      lesson: 'Estar no lugar errado, na hora errada, com o posicionamento errado. A tríade do fracasso foi completada com sucesso.',
+    },
+    {
+      event: 'Capitulação de Detroit (1812)',
+      description: 'O general William Hull, aterrorizado por gritos de guerra indígenas que ele mal ouviu, entregou um forte fortificado e todo o seu exército sem disparar um único tiro contra as tropas britânicas em menor número.',
+      lesson: 'Dar "FF" mental antes mesmo da luta começar é uma tradição iniciada por Hull. Você a honrou com uma covardia tática digna de nota.',
+    },
+    {
+      event: 'Corte Marcial de William Hull (1814)',
+      description: 'Hull foi o único general americano condenado à morte por covardia. Ele não perdeu por falta de meios, mas por uma paralisia absoluta da vontade diante do inimigo.',
+      lesson: 'Sua hesitação em apertar qualquer botão nesta partida foi tão paralisante que Hull pareceria um herói de guerra ao seu lado.',
     },
   ],
 
-  // Jogos longos e perdidos (> 45 min) — Guerras de atrito exaustivas
+  // Jogos longos e perdidos (> 45 min) — Teimosia suicida e agonia prolongada
   LONG_ATTRITION: [
     {
-      event: 'Cerco de Leningrado (1941-1944)',
-      description: 'Por 872 dias, a cidade resistiu ao cerco nazista. Ao final, os sobreviventes mal se distinguiam dos mortos. Uma vitória pírrica que custou mais do que qualquer derrota.',
-      lesson: 'Há um ponto em que a persistência deixa de ser virtude e torna-se teimosia suicida. Reconhecer esse momento é a verdadeira sabedoria estratégica.',
+      event: 'Guerra dos Oitenta Anos (1568–1648)',
+      description: 'A Espanha tentou manter o controle sobre os Países Baixos por oito décadas. Gastaram todo o ouro das Américas para, no final, perderem tudo e declararem falência três vezes.',
+      lesson: 'Investir tempo e recursos em uma causa perdida não é resiliência, é incapacidade de aceitar a matemática da derrota.',
     },
     {
-      event: 'Batalha de Verdun (1916)',
-      description: 'Dez meses. Trezentos mil mortos. Zero ganhos territoriais significativos. A Batalha de Verdun é o monumento mais eloquente à futilidade da guerra de atrito.',
-      lesson: 'Quando ambos os lados perdem mais do que podem ganhar, a questão não é quem vence — é quem perde menos tragicamente.',
+      event: 'Campanha de Galípoli (1915)',
+      description: 'Winston Churchill idealizou um plano audacioso que resultou em meses de agonia nas trincheiras de uma praia sem saída. Meio milhão de baixas para absolutamente nada.',
+      lesson: 'Parabéns. Você conseguiu transformar um simples jogo em um monumento à futilidade humana.',
     },
     {
-      event: 'Guerra dos Emboabas (1708-1709)',
-      description: 'No Brasil colonial, paulistas e forasteiros disputaram as minas de ouro em um conflito que enriqueceu apenas a Coroa Portuguesa, enquanto os combatentes se destruíam mutuamente.',
-      lesson: 'Conflitos prolongados raramente beneficiam os combatentes. O verdadeiro vencedor costuma ser aquele que observa de fora.',
+      event: 'Guerra do Vietnã (Fase Americana)',
+      description: 'A maior potência do mundo gastou bilhões de dólares e uma década tentando ganhar uma guerra que já havia sido decidida pela moral do adversário muito antes.',
+      lesson: 'Sua insistência em não dar "FF" é quase poética, se não fosse tecnicamente patética.',
+    },
+    {
+      event: 'A Retirada de Moscou (1812)',
+      description: 'O Grande Exército de Napoleão entrou em Moscou esperando uma rendição. Encontraram apenas cinzas e um inverno que os caçou por meses até que não restasse quase ninguém.',
+      lesson: 'Ganhar batalhas inúteis enquanto perde a guerra logística é a marca registrada dos amadores. Divirta-se no frio da derrota.',
+    },
+    {
+      event: 'Guerra do Paraguai (1864–1870)',
+      description: 'Um conflito que se arrastou até que a população masculina de um país inteiro fosse quase extinta. Uma teimosia que redefiniu o conceito de desastre.',
+      lesson: 'O seu "late game" é apenas um epílogo prolongado de uma tragédia que todos os outros já previram aos 10 minutos.',
+    },
+    {
+      event: 'Batalha de Kandahar (2001-2021)',
+      description: 'Vinte anos de ocupação tática para um colapso em menos de duas semanas. O tempo não cura a falta de uma estratégia de saída.',
+      lesson: 'Arrastar o jogo por 50 minutos para perder em uma luta mal feita no Baron... você é um historiador nato do masoquismo.',
+    },
+    {
+      event: 'O Cerco de Tiro (332 a.C.)',
+      description: 'Os fenícios resistiram por sete meses, construindo muralhas cada vez maiores, apenas para Alexandre construir uma ponte de terra e massacrar a todos.',
+      lesson: 'Não importa o quão alto você construa sua defesa se o inimigo tem mais paciência e intelecto que você.',
+    },
+    {
+      event: 'Campanha de Humaitá (1866-1868)',
+      description: 'Francisco Solano López acreditou que poderia vencer três nações simultaneamente. Ele arrastou seu exército para um moedor de carne que durou anos, sacrificando até crianças quando os homens acabaram.',
+      lesson: 'Sua insistência em não admitir a derrota transformou este jogo em um Paraguai de 1870. Um sacrifício inútil por um ego que não cabe no mapa.',
+    },
+    {
+      event: 'Último Reduto de Cerro Corá (1870)',
+      description: 'O fim da Guerra do Paraguai. Solano López morreu no barro, tendo levado seu país ao colapso total por se recusar a aceitar os termos de uma paz inevitável anos antes.',
+      lesson: 'Há uma linha tênue entre "heroísmo" e "delírio de Solano López". Você cruzou essa linha aos 15 minutos e continuou correndo até os 50.',
     },
   ],
 
-  // Muitas mortes (> 10 deaths) — Táticas de "carne de canhão"
+  // Muitas mortes (> 10 deaths) — Incompetência tática e sacrifício inútil
   CANNON_FODDER: [
     {
-      event: 'Carga da Brigada Ligeira (1854)',
-      description: 'Seiscentos cavaleiros britânicos carregaram diretamente contra a artilharia russa por um erro de comunicação. O resultado foi previsível para todos, exceto para quem ordenou a carga.',
-      lesson: 'A coragem sem inteligência é indistinguível do suicídio. E o suicídio, por mais dramático que seja, raramente constitui uma estratégia vencedora.',
+      event: 'Massacre de Katyn (1940)',
+      description: 'Milhares de oficiais foram eliminados sistematicamente por um erro de julgamento sobre quem era realmente o inimigo. Uma eliminação limpa, cruel e absoluta.',
+      lesson: 'Sua tela cinza é o gráfico mais estável desta partida. Uma consistência admirável na arte de morrer.',
     },
     {
-      event: 'Batalha do Somme (1916)',
-      description: 'No primeiro dia, o exército britânico sofreu 57.470 baixas — o pior dia de sua história militar. O plano assumia que a artilharia prévia havia eliminado toda resistência. Não havia.',
-      lesson: 'Planejar com base em suposições não verificadas é o privilégio dos incompetentes. Os resultados, invariavelmente, provam o ponto.',
+      event: 'Batalha de Passchendaele (1917)',
+      description: 'Soldados morreram afogados na lama antes mesmo de verem o inimigo. O comando insistia em avanços frontais em um pântano de artilharia.',
+      lesson: 'Morrer dez vezes da mesma forma sugere que seu processo de aprendizado está preso em um loop medieval.',
     },
     {
-      event: 'Cerco de Cartago (149-146 a.C.)',
-      description: 'Os cartagineses, cercados e sem esperança, continuaram resistindo por três anos. Cada sortida era um sacrifício sem propósito estratégico, apenas adiando o inevitável.',
-      lesson: 'Há uma diferença fundamental entre resistência heroica e obstinação autodestrutiva. A história raramente é gentil com quem não consegue distingui-las.',
+      event: 'Revolta dos Boxers (1900)',
+      description: 'Camponeses chineses acreditaram que rituais mofados os tornariam imunes às balas ocidentais. A realidade, infelizmente para eles, era feita de chumbo.',
+      lesson: 'Acreditar que sua build "off-meta" te tornaria invencível é o tipo de pensamento mágico que eu esperava de um camponês do século XIX, não de você.',
+    },
+    {
+      event: 'A Carga dos Três Reis (1578)',
+      description: 'D. Sebastião desapareceu no deserto do Marrocos levando consigo toda a nobreza de Portugal. Uma geração inteira perdida por um delírio de grandeza.',
+      lesson: 'Sua jornada solo pela jungle inimiga sem visão foi o nosso "Alcácer-Quibir". Só falta agora esperarmos o seu retorno em uma manhã de nevoeiro.',
+    },
+    {
+      event: 'Expedição à Sicília (415 a.C.)',
+      description: 'Atenas enviou sua frota mais gloriosa para uma invasão desnecessária. Foram todos mortos ou escravizados em pedreiras. Foi o fim da Era de Ouro.',
+      lesson: 'O excesso de agressividade sem um objetivo claro é o caminho mais curto para a escravidão no elo baixo.',
+    },
+    {
+      event: 'A Grande Purga (1936)',
+      description: 'Stalin eliminou seus próprios generais mais talentosos por paranoia. Quando a guerra real chegou, não havia ninguém para liderar.',
+      lesson: 'Você se sabotou tantas vezes nesta partida que eu comecei a suspeitar que você é um agente infiltrado do time adversário.',
+    },
+    {
+      event: 'Desastre de Annual (1921)',
+      description: 'Exército espanhol em debandada no Marrocos. 13 mil mortos em poucos dias contra tribos locais. Uma falha total de comando e nervos.',
+      lesson: 'Sua "estratégia" de recuo é apenas uma fuga desordenada que dá vergonha até aos seus ancestrais.',
     },
   ],
 
-  // Derrota padrão — Queda de impérios e erros táticos gerais
+  // Derrota padrão — Erros de julgamento e complacência
   STANDARD_DEFEAT: [
     {
-      event: 'Queda de Constantinopla (1453)',
-      description: 'O Império Bizantino sobreviveu por mil anos após a queda de Roma. Ao final, foi derrubado não por falta de muralhas, mas por falta de aliados e por uma única porta deixada destrancada.',
-      lesson: 'Impérios não caem por falta de força — caem por acúmulo de pequenos descuidos que, somados, tornam-se catástrofes.',
+      event: 'Batalha de Tsushima (1905)',
+      description: 'A frota russa viajou metade do mundo apenas para ser afundada em poucas horas por uma marinha japonesa tecnicamente superior e mais bem posicionada.',
+      lesson: 'Andar muito pelo mapa para não fazer nada e morrer no final. Os russos de 1905 ficariam orgulhosos do seu cosplay.',
     },
     {
-      event: 'Batalha de Teutoburgo (9 d.C.)',
-      description: 'Três legiões romanas foram aniquiladas na Floresta de Teutoburgo por subestimarem um inimigo que conhecia o terreno melhor do que eles. Roma nunca mais cruzou o Reno.',
-      lesson: 'Subestimar o adversário em seu próprio território é um erro que os romanos cometeram uma vez. Você, aparentemente, ainda está aprendendo essa lição.',
+      event: 'O Cisma do Ocidente (1378)',
+      description: 'A Igreja teve dois papas, depois três, e ninguém sabia quem obedecer. A instituição nunca mais foi a mesma após tanta confusão interna.',
+      lesson: 'Sua falta de comunicação com o time transformou o chat em um concílio de idiotas. O resultado não poderia ser outro.',
     },
     {
-      event: 'Queda de Cartago (146 a.C.)',
-      description: 'Cartago foi destruída tão completamente que os romanos salgaram a terra para que nada mais crescesse ali. A derrota não foi apenas militar — foi existencial.',
-      lesson: 'Quando a derrota é suficientemente completa, ela não deixa nem mesmo a dignidade de uma lição aprendida.',
+      event: 'Batalha de Carrhae (53 a.C.)',
+      description: 'Crasso, o homem mais rico de Roma, achou que poderia comprar a vitória contra os partos. Acabou com ouro derretido despejado em sua garganta.',
+      lesson: 'Ter 10k de ouro acumulado e não gastar em itens úteis? Crasso pelo menos teve a decência de morrer com o ouro.',
+    },
+    {
+      event: 'A Queda do Muro de Berlim (1989)',
+      description: 'Um sistema inteiro colapsou não por uma grande batalha, mas pela fadiga de uma estrutura que não conseguia mais se sustentar.',
+      lesson: 'Sua base caiu com a mesma facilidade de uma ditadura falida. Faltou apenas o David Hasselhoff cantando sobre as ruínas.',
+    },
+    {
+      event: 'O Incidente de Fachoda (1898)',
+      description: 'Duas nações quase entraram em guerra por um pântano inútil no meio da África, apenas para uma delas perceber que não tinha como vencer e sair de fininho.',
+      lesson: 'Lutar por objetivos secundários enquanto seu Nexus é exposto é uma assinatura tática deplorável.',
+    },
+    {
+      event: 'Batalha de Lepanto (1571)',
+      description: 'Uma das últimas grandes batalhas de galés. Quem não soube manobrar com o vento, acabou no fundo do Mediterrâneo.',
+      lesson: 'Sua incapacidade de ler o "vento" das lutas de equipe é quase um talento para a geologia marinha.',
+    },
+    {
+      event: 'O Tratado de Versalhes (1919)',
+      description: 'Uma tentativa de paz que garantiu a próxima guerra. Uma solução tão mal planejada que o fracasso era a única saída possível.',
+      lesson: 'Suas "jogadas de recuperação" apenas aceleraram o final inevitável. Foi um erro diplomático e mecânico.',
     },
   ],
 };
@@ -99,6 +199,9 @@ const CLOSING_REMARKS = [
   'Recomendo uma pausa para contemplação. Talvez uma leitura de Sun Tzu. Ou qualquer livro, realmente.',
   'Sua contribuição para as estatísticas de derrota deste servidor é, de longe, a mais consistente.',
   'Fico feliz em informar que sua performance foi exatamente o que eu esperava. Infelizmente.',
+  'Sua gestão de recursos me lembrou Solano López: gastou tudo o que tinha e o que não tinha para terminar morto em um riacho de lama.',
+  'Se William Hull visse o seu "engage", ele se sentiria confiante o suficiente para voltar ao exército.',
+  'Parabéns pela resiliência. Nem o Paraguai do século XIX foi tão longe no caminho da autodestruição.',
 ];
 
 // ==========================================
