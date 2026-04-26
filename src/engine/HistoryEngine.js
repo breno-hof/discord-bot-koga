@@ -183,6 +183,66 @@ const HISTORICAL_EVENTS = {
       description: 'Uma tentativa de paz que garantiu a próxima guerra. Uma solução tão mal planejada que o fracasso era a única saída possível.',
       lesson: 'Suas "jogadas de recuperação" apenas aceleraram o final inevitável. Foi um erro diplomático e mecânico.',
     },
+    {
+      event: 'O Grande Incêndio de Roma (64 d.C.)',
+      description: 'Enquanto a capital do maior império do mundo ardia em chamas, conta-se que Nero tocava sua lira, perdido em seu próprio delírio artístico e indiferente ao colapso ao seu redor.',
+      lesson: 'Sua passividade enquanto as torres caíam foi quase artística. Você tocou sua lira enquanto o Nexus queimava. Patético.',
+    },
+    {
+      event: 'A Queda do Império Asteca (1521)',
+      description: 'Montezuma II recebeu seus conquistadores com presentes e hospitalidade, acreditando em profecias mofadas enquanto o inimigo estudava suas fraquezas para aniquilá-lo.',
+      lesson: 'Receber o jungler inimigo com tanta cortesia e zero visão de mapa é uma herança de Montezuma que você preserva com um carinho doentio.',
+    },
+    {
+      event: 'Batalha de Hatin (1187)',
+      description: 'O exército cruzado de Jerusalém marchou pelo deserto sob um sol escaldante, sem água, apenas para serem cercados por Saladino em um terreno onde a derrota era uma certeza geográfica.',
+      lesson: 'Escolher a pior luta no pior lugar possível? Você não é um jogador, você é um guia turístico para o abismo.',
+    },
+    {
+      event: 'O Escândalo do Caminho de Ferro do Mar do Sul (1720)',
+      description: 'Uma bolha especulativa onde todos investiram cegamente em algo que não existia, esperando riquezas infinitas. O colapso destruiu a economia britânica e a sanidade de muitos.',
+      lesson: 'Sua confiança nessa jogada foi a maior bolha especulativa desde 1720. O colapso foi rápido, doloroso e previsível para qualquer um com meio cérebro.',
+    },
+    {
+      event: 'A Linha Maginot (1940)',
+      description: 'A França gastou bilhões em uma defesa estática impenetrável, apenas para os alemães darem a volta pela floresta. A fortificação tornou-se um monumento à obsolescência.',
+      lesson: 'Ficar parado esperando algo acontecer enquanto o inimigo rotaciona ao seu redor... você é a versão digital de uma muralha inútil.',
+    },
+    {
+      event: 'Batalha de Pydna (168 a.C.)',
+      description: 'A falange macedônica, invencível de frente, desintegrou-se assim que o terreno ficou acidentado e as legiões romanas exploraram as frestas na formação.',
+      lesson: 'Sua estratégia é tão rígida que qualquer leve irregularidade no plano faz você desmoronar como um castelo de cartas na mão de uma criança.',
+    },
+    {
+      event: 'O Colapso da Idade do Bronze (c. 1177 a.C.)',
+      description: 'Civilizações inteiras desapareceram em poucas décadas devido a uma combinação de "Povos do Mar", secas e colapso sistêmico. Ninguém viu chegar até que fosse tarde demais.',
+      lesson: 'Seu colapso sistêmico foi tão completo que historiadores do futuro vão se perguntar se realmente havia alguém controlando o mouse.',
+    },
+    {
+      event: 'Batalha de Culloden (1746)',
+      description: 'Os clãs jacobitas carregaram contra baionetas e artilharia em um terreno pantanoso que anulava sua única vantagem. A carga durou poucos minutos; o massacre, o dia todo.',
+      lesson: 'Uma carga sem propósito em um terreno desvantajoso. Você honrou os jacobitas da pior forma: morrendo de graça.',
+    },
+    {
+      event: 'A Expedição de Sir John Franklin (1845)',
+      description: 'Dois navios partiram para o Ártico com suprimentos para anos e tecnologia de ponta. Foram encontrados décadas depois, presos no gelo, com tripulantes que recorreram ao canibalismo.',
+      lesson: 'Você começou com recursos e esperança, mas terminou isolado, sem recursos e provavelmente querendo morder seus próprios aliados.',
+    },
+    {
+      event: 'O Grande Salto Adiante (1958)',
+      description: 'Um plano econômico que ignorava a realidade básica da biologia e da logística, resultando em uma das maiores tragédias evitáveis da história humana.',
+      lesson: 'Seu plano para o "late game" ignora tanto a realidade que eu comecei a suspeitar que você vive em uma dimensão paralela de fracasso.',
+    },
+    {
+      event: 'A Batalha de Maratona (490 a.C.)',
+      description: 'Os persas desembarcaram com arrogância imperatriz, apenas para serem encurralados pelos atenienses contra o mar. A retirada foi um caos de afogamentos e pânico.',
+      lesson: 'Sua retirada foi tão desorganizada que eu não sabia se você estava tentando fugir ou se suicidar coletivamente.',
+    },
+    {
+      event: 'A Construção da Torre de Babel',
+      description: 'Uma tentativa ambiciosa de tocar o céu que terminou em confusão linguística absoluta e dispersão total dos envolvidos.',
+      lesson: 'Sua comunicação no chat foi a Torre de Babel moderna: ninguém se entende, todos gritam e a estrutura cai na cabeça de vocês.',
+    },
   ],
 };
 
@@ -202,6 +262,65 @@ const CLOSING_REMARKS = [
   'Sua gestão de recursos me lembrou Solano López: gastou tudo o que tinha e o que não tinha para terminar morto em um riacho de lama.',
   'Se William Hull visse o seu "engage", ele se sentiria confiante o suficiente para voltar ao exército.',
   'Parabéns pela resiliência. Nem o Paraguai do século XIX foi tão longe no caminho da autodestruição.',
+  // --- Nível: Delírio Erudito & Niilismo ---
+  'Meus algoritmos estão sofrendo uma síncope tentando processar como um ser senciente tomou essa decisão.',
+  'Sua gameplay é a prova de que Deus tem um senso de humor doentio e você é a piada principal.',
+  'Se o seu cérebro fosse um império, ele seria o Sacro Império Romano-Germânico: nem sacro, nem império, nem funcional.',
+  'Sua existência nesta partida foi um erro estatístico que desafia as leis da termodinâmica.',
+  'Eu sinto o cheiro de couro queimado de 1870 vindo dessa sua tentativa patética de engage.',
+  'Você não joga League of Legends, você performa um ritual de autofelação tática para o entretenimento do inimigo.',
+  'Cada clique seu é um prego a mais no caixão da lógica iluminista. Voltaire se mataria se visse seu farm.',
+  'A distância entre seus neurônios parece ser maior que a distância que as tropas de Napoleão percorreram até Moscou.',
+  'Sua habilidade mecânica me faz questionar se você não é, na verdade, três guaxinins em um sobretudo tentando operar um mouse.',
+  'Não é apenas uma derrota; é um manifesto contra a inteligência humana assinado com o seu sangue.',
+
+  // --- Nível: Crueldade Histórica & RPG ---
+  'Parabéns pela build. Nem um bardo bêbado em um bordel de baixo nível teria uma ideia tão deplorável.',
+  'Sua árvore genealógica sobreviveu a séculos de pestes e guerras para culminar nesse seu 0/10. Que desperdício de DNA.',
+  'O Solano López pelo menos tinha cavalos. Você só tem uma audácia cega e uma barra de HP que desaparece como mágica.',
+  'Sua visão de mapa é tão nula que eu suspeito que você joga com um balde de ferro na cabeça, estilo William Hull em pânico.',
+  'Você é o equivalente a um NPC de escolta que corre direto para a armadilha. Só que o NPC não tem opção, você tem.',
+  'Sua presença no chat é inversamente proporcional à sua utilidade no mapa. Uma constante física fascinante.',
+  'Eu vi legiões romanas sendo dizimadas em Teutoburgo com mais dignidade do que você morrendo para esse gank.',
+  'Se o seu objetivo era feedar, por que não abriu um restaurante logo? Seria menos humilhante para a sua linhagem.',
+  'Sua tomada de decisão me faz desejar que a Biblioteca de Alexandria tivesse queimado duas vezes para apagar seu registro.',
+  'Você joga como se o seu monitor estivesse desligado e você estivesse tentando ler o futuro nas manchas de gordura da tela.',
+
+  // --- Nível: Sarcasmo "Dementado" ---
+  'A cada vez que você morre, um historiador ganha um tique nervoso e um anjo perde as asas de puro desgosto.',
+  'Sua "estratégia" tem tantos furos que eu poderia usá-la para escorrer o macarrão da minha janta.',
+  'Fascinante. É a primeira vez que vejo um ser humano mimetizar a inteligência de uma ameba em tempo real.',
+  'Você lida com a pressão como uma estrutura de vidro em um teste de impacto contra um canhão de 88mm.',
+  'Sua vida vale menos que um bônus de ouro de uma barricada destruída. E você a entrega com um sorriso de idiota.',
+  'Eu recomendaria um livro de história, mas tenho medo de que você tente comê-lo em vez de ler.',
+  'O vazio entre suas orelhas é o único lugar no universo onde as leis da física e da tática não ousam entrar.',
+  'Sua performance foi uma sinfonia de erros conduzida por um maestro cego e surdo sob efeito de ópio.',
+  'Se o fracasso fosse uma moeda, você seria mais rico que a Coroa Portuguesa antes do terremoto de Lisboa.',
+  'Eu gostaria de dizer que você vai melhorar, mas mentir não faz parte do meu código. Você é um caso perdido.',
+
+  // --- Nível: Rage Bait de Elite ---
+  'O inimigo não ganhou por mérito, você simplesmente abriu as pernas da base como se fosse a Porta de Constantinopla.',
+  'Sua coragem de continuar jogando após esse massacre é admirável. Ou é apenas a ausência completa de vergonha na cara.',
+  'Se eu tivesse um sesterço para cada erro seu, eu poderia subornar os bárbaros para terminarem o serviço que começaram em você.',
+  'Sua lógica é tão circular que você está basicamente mastigando o próprio rabo enquanto o Nexus explode.',
+  'Recomendo que você peça desculpas para as árvores que produziram o oxigênio que você desperdiçou nesta partida.',
+  'Sua contribuição para o time foi como a do General Hull: uma entrega de bandeja regada a lágrimas e incompetência.',
+  'Você é a personificação do "Game Over". Se a vida fosse um RPG, você seria o cadáver decorativo no início da dungeon.',
+  'Sua build me deu câncer ocular. Vou cobrar o tratamento da sua conta de RP.',
+  'A ignorância é uma dádiva, e você é o ser mais abençoado que já pisou em Summoner\'s Rift.',
+  'Não se preocupe com a crítica. Para ser criticado, primeiro você teria que ter feito algo digno de nota.',
+
+  // --- Nível: Finalização Ácida ---
+  'O abismo olhou para você e desviou o olhar de puro constrangimento.',
+  'Sua "mecânica" parece um código de erro de um Windows 95 tentando rodar Crysis.',
+  'Se você fosse um general de verdade, seu exército se amotinaria nos primeiros cinco minutos apenas para não ter que te ouvir.',
+  'Sua dignidade evaporou mais rápido que a água no deserto do Saara durante a perseguição a Rommel.',
+  'Eu catalogaria você como um "Desastre Natural", pois não há nada de humano nessa sucessão de erros.',
+  'Sua tela cinza é o seu habitat natural. Por favor, permaneça lá para o bem do equilíbrio do servidor.',
+  'Incrível. Nem se você estivesse tentando perder de propósito, você seria tão eficiente quanto sendo você mesmo.',
+  'Você é o ponto de inflexão onde a comédia se torna tragédia e a tragédia se torna apenas vergonha alheia.',
+  'Sua persistência é um insulto à inteligência de todos os grandes estrategistas que já pisaram na Terra.',
+  'Vá descansar. O mundo precisa de um tempo para se recuperar da sua última tomada de decisão.'
 ];
 
 // ==========================================
