@@ -5,7 +5,7 @@ services:
     container_name: koga-bot
     restart: unless-stopped
     volumes:
-      - koga-data:/app/data
+      - koga-data2:/app/data
     environment:
       - NODE_ENV=production
       - DISCORD_TOKEN=${DISCORD_TOKEN}
@@ -18,5 +18,5 @@ services:
       - POLLING_DELAY_MS=${POLLING_DELAY_MS:-1500}
 
 volumes:
-  koga-data:
+  koga-data2:
     driver: local
