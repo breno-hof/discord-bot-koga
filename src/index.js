@@ -4,12 +4,17 @@ const path = require('path');
 const config = require('./utils/config');
 const { getDatabase, closeDatabase } = require('./database/init');
 const { init: initPollingWorker } = require('./services/PollingWorker');
+const dndRulesListener = require('./listeners/dndRulesListener');
 
 // ==========================================
 // INICIALIZAÇÃO DO CLIENTE DISCORD
 // ==========================================
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,    // Necessário para receber mensagens
+    GatewayIntentBits.MessageContent,   // Necessário para ler o conteúdo das mensagens
+  ],
 });
 
 client.commands = new Collection();
@@ -38,15 +43,30 @@ client.once(Events.ClientReady, (c) => {
   // Inicializar banco de dados
   getDatabase();
 
-  // Inicializar Polling Worker
+  // Inicializar Polling Worker (LoL)
   initPollingWorker(client);
+
+  // Registrar listener de regras D&D
+  dndRulesListener.register(client);
 
   // Status do bot
   client.user.setActivity('📜 Estudando suas derrotas...', { type: 4 });
 });
 
-// Handler de Slash Commands
+// Handler de Slash Commands e Autocomplete
 client.on(Events.InteractionCreate, async (interaction) => {
+  // Autocomplete
+  if (interaction.isAutocomplete()) {
+    const command = client.commands.get(interaction.commandName);
+    if (!command || !command.autocomplete) return;
+    try {
+      await command.autocomplete(interaction);
+    } catch (error) {
+      console.error(`❌ Erro no autocomplete de /${interaction.commandName}:`, error);
+    }
+    return;
+  }
+
   if (!interaction.isChatInputCommand()) return;
 
   const command = client.commands.get(interaction.commandName);

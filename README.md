@@ -2,7 +2,7 @@
 
 > *"A história está repleta de generais incompetentes. Você está em boa companhia."*
 
-Bot de Discord multitenant para monitoramento de performance no **League of Legends**, com análise histórico-irônica de derrotas. Desenvolvido em Node.js para a organização [devyor.fun](https://devyor.fun).
+Bot de Discord multitenant para monitoramento de performance no **League of Legends**, com análise histórico-irônica de derrotas — e árbitro de regras de **D&D 5e (2024)**. Desenvolvido em Node.js para a organização [devyor.fun](https://devyor.fun).
 
 ---
 
@@ -10,15 +10,20 @@ Bot de Discord multitenant para monitoramento de performance no **League of Lege
 
 ```
 src/
-├── commands/           # Slash Commands do Discord
-│   ├── config_koga.js  # Define o canal de notificações
-│   ├── vincular.js     # Adiciona jogador ao monitoramento
-│   └── status.js       # Lista jogadores monitorados
+├── commands/               # Slash Commands do Discord
+│   ├── config_koga.js      # Define o canal de notificações
+│   ├── vincular.js         # Adiciona jogador ao monitoramento
+│   ├── status.js           # Lista jogadores monitorados
+│   └── regra.js            # Consulta regras do Glossário D&D 5e
 ├── database/
-│   ├── init.js         # Inicialização e schema do SQLite
-│   └── queries.js      # Queries reutilizáveis
+│   ├── init.js             # Inicialização e schema do SQLite
+│   └── queries.js          # Queries reutilizáveis
 ├── engine/
-│   └── HistoryEngine.js # Core Engine de análise histórico-irônica
+│   ├── HistoryEngine.js    # Core Engine de análise histórico-irônica (LoL)
+│   ├── DnDEngine.js        # Motor de busca no Glossário D&D 5e
+│   └── glossary_data.json  # Glossário D&D 5e (Apêndice C, págs. 360–377)
+├── listeners/
+│   └── dndRulesListener.js # Listener de mensagens para regras D&D
 ├── services/
 │   ├── RiotApiService.js # Integração com Riot Games API
 │   └── PollingWorker.js  # Worker de polling (node-cron)
@@ -47,6 +52,54 @@ src/
 | `/config_koga` | Define o canal de notificações do servidor | Administrador |
 | `/vincular Nome#Tag` | Adiciona um jogador ao monitoramento | Qualquer usuário |
 | `/status` | Lista jogadores monitorados no servidor | Qualquer usuário |
+| `/regra <termo>` | Consulta uma regra do Glossário D&D 5e (com autocomplete) | Qualquer usuário |
+
+---
+
+## Funcionalidade D&D — Árbitro de Regras
+
+O Koga monitora todas as mensagens do servidor em busca das palavras-gatilho **"explica"** e **"sustenta"**. Ao detectá-las acompanhadas de um termo de regra, ele consulta o **Glossário de Regras D&D 5e 2024 (Apêndice C, págs. 360–377)** e responde com a definição oficial — no tom característico do personagem.
+
+### Como usar
+
+Basta digitar em qualquer canal onde o bot tenha acesso:
+
+```
+explica vantagem
+sustenta acerto crítico
+alguém explica o que é exaustão?
+sustenta a regra de concentração
+explica CA
+sustenta PV
+```
+
+O bot também responde ao comando slash com autocomplete:
+
+```
+/regra termo:Salvaguarda Contra Morte
+```
+
+### Termos disponíveis (101 entradas canônicas)
+
+O glossário cobre todos os termos do Apêndice C, incluindo:
+
+| Categoria | Exemplos |
+| :--- | :--- |
+| **Condições** | Amedrontado, Atordoado, Caído, Cego, Enfeitiçado, Envenenado, Exaustão, Imobilizado, Incapacitado, Invisível |
+| **Ações** | Ação, Ação Bônus, Ajudar, Analisar, Atacar, Desengajar, Esconder, Esquivar, Preparar, Procurar, Usar Magia, Usar Objeto |
+| **Combate** | Acerto Crítico, Ataque Armado, Ataque Desarmado, Ataque Mágico, Ataques de Oportunidade, Iniciativa, Jogada de Ataque, Surpresa |
+| **Mecânicas** | Vantagem, Desvantagem, Concentração, Proficiência, Especialização, Salvaguarda, Teste de Atributo, Teste de D20 |
+| **Recursos** | Pontos de Vida, Classe de Armadura, Classe de Dificuldade, Nível de Desafio, Pontos de Experiência, Descanso Curto, Descanso Longo |
+| **Áreas de Efeito** | Cilindro, Cone, Cubo, Emanação, Esfera, Linha |
+| **Outros** | Alinhamento, Armas Improvisadas, Asfixia, Capacidade de Carga, Cobertura, Magia, Queda, Resistência, Ritual, Tamanho, Terreno Difícil, Truque, Vulnerabilidade |
+
+Abreviações também são reconhecidas: `CA`, `CD`, `PV`, `ND`, `XP`, `BP`.
+
+### Intents necessários
+
+A funcionalidade de monitoramento de mensagens requer que os seguintes **Privileged Gateway Intents** estejam habilitados no [Discord Developer Portal](https://discord.com/developers/applications):
+
+- `MESSAGE CONTENT INTENT` — para leitura do conteúdo das mensagens
 
 ---
 
@@ -125,6 +178,7 @@ Consulte a [documentação completa de regras de negócio](./docs/business_rules
 - Tratamento de erros da Riot API
 - Configuração multi-tenant
 - Personalidade e tom de voz do bot
+- Motor de busca D&D (DnDEngine) e lógica de matching
 
 ---
 
