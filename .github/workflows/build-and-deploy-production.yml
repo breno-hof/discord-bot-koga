@@ -81,8 +81,6 @@ jobs:
           POLLING_DELAY_MS: ${{ vars.POLLING_DELAY_MS }}
         run: |
           envsubst < infra/prod/docker-compose.yml > /tmp/docker-compose-deploy.yml
-          echo "=== docker-compose.yml a ser enviado ==="
-          cat /tmp/docker-compose-deploy.yml
 
       - name: Deploy Docker project on Hostinger
         env:
