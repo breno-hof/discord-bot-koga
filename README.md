@@ -33,9 +33,9 @@ src/
 
 | Diagrama | Descrição |
 | :--- | :--- |
-| [Arquitetura](./docs/diagrams/architecture.png) | Visão geral dos componentes e integrações |
-| [Sequência](./docs/diagrams/sequence.png) | Fluxo de execução dos processos principais |
-| [Entidade-Relacionamento](./docs/diagrams/er.png) | Modelo de dados do SQLite |
+| [Arquitetura](./docs/diagrams/architecture.svg) | Visão geral dos componentes e integrações |
+| [Sequência](./docs/diagrams/sequence.svg) | Fluxo de execução dos processos principais |
+| [Entidade-Relacionamento](./docs/diagrams/er.svg) | Modelo de dados do SQLite |
 
 ---
 

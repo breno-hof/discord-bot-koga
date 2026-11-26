@@ -8,7 +8,7 @@ Riot Games API: {
   shape: cloud
 }
 
-Koga Bot (Node.js): {
+bot: "Koga Bot (Node.js)" {
   shape: package
 
   Discord Client: {
@@ -49,11 +49,11 @@ SQLite Database: {
   shape: cylinder
 }
 
-Discord -> Koga Bot (Node.js).Discord Client: Gateway (eventos)
-Koga Bot (Node.js).Discord Client -> Discord: Mensagens/Embeds
+Discord -> bot.Discord Client: Gateway (eventos)
+bot.Discord Client -> Discord: Mensagens/Embeds
 
-Koga Bot (Node.js).Riot API Service -> Riot Games API: HTTP GET (ACCOUNT-V1, MATCH-V5)
-Riot Games API -> Koga Bot (Node.js).Riot API Service: JSON
+bot.Riot API Service -> Riot Games API: HTTP GET (ACCOUNT-V1, MATCH-V5)
+Riot Games API -> bot.Riot API Service: JSON
 
-Koga Bot (Node.js).Database Service -> SQLite Database: Read/Write
-SQLite Database -> Koga Bot (Node.js).Database Service: Results
+bot.Database Service -> SQLite Database: Read/Write
+SQLite Database -> bot.Database Service: Results

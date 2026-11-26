@@ -7,9 +7,9 @@ SQLite
 Riot API
 
 vincular: "/vincular Nome#Tag" {
-  User -> Discord: /vincular Nome#Tag
+  User -> Discord: "/vincular Nome#Tag"
   Discord -> Koga Bot: InteractionCreate (vincular)
-  Koga Bot -> Riot API: GET /riot/account/v1/accounts/by-riot-id/{nome}/{tag}
+  Koga Bot -> Riot API: "GET /riot/account/v1/accounts/by-riot-id/{nome}/{tag}"
   Riot API -> Koga Bot: PUUID {style.stroke-dash: 3}
   Koga Bot -> SQLite: INSERT OR IGNORE INTO tracked_players
   SQLite -> Koga Bot: OK / já existia {style.stroke-dash: 3}
@@ -25,7 +25,7 @@ polling: "Polling (a cada POLLING_INTERVAL_MINUTES)" {
   Koga Bot -> SQLite: "Sem last_match_id: só grava o ponto de partida"
   Koga Bot -> Riot API: "Partida nova: GET /lol/match/v5/matches/{matchId}"
   Riot API -> Koga Bot: Dados da partida {style.stroke-dash: 3}
-  Koga Bot -> SQLite: UPDATE last_match_id; INSERT match_history (exceto remake)
+  Koga Bot -> SQLite: "UPDATE last_match_id + INSERT match_history (exceto remake)"
   Koga Bot -> Koga Bot: "Derrota: HistoryEngine.analyze()"
   Koga Bot -> Discord: Envia embed no canal configurado
 }

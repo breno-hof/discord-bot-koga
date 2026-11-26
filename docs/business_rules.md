@@ -20,13 +20,13 @@ O sistema segue uma arquitetura modular baseada em serviços, com os seguintes c
 ### 2.1. Diagramas de Arquitetura
 
 **Visão Geral da Arquitetura:**
-![Diagrama de Arquitetura](./diagrams/architecture.png)
+![Diagrama de Arquitetura](./diagrams/architecture.svg)
 
 **Fluxo de Execução (Sequência):**
-![Diagrama de Sequência](./diagrams/sequence.png)
+![Diagrama de Sequência](./diagrams/sequence.svg)
 
 **Modelo de Dados (Entidade-Relacionamento):**
-![Diagrama ER](./diagrams/er.png)
+![Diagrama ER](./diagrams/er.svg)
 
 ## 3. Regras de Negócio
 
