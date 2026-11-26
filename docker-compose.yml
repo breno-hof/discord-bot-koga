@@ -2,7 +2,7 @@ version: "3.8"
 services:
   koga-bot:
     build: .
-    image: ghcr.io/devyor-dot-fun/discord-bot-koga:latest
+    image: ghcr.io/breno-hof/discord-bot-koga:main
     container_name: koga-bot
     restart: unless-stopped
     volumes:

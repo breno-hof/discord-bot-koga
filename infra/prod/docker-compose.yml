@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   koga-bot:
-    image: ghcr.io/devyor-dot-fun/discord-bot-koga:main
+    image: ghcr.io/breno-hof/discord-bot-koga:main
     container_name: koga-bot
     restart: unless-stopped
     volumes:
@@ -12,7 +12,6 @@ services:
       - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
       - RIOT_API_KEY=${RIOT_API_KEY}
       - RIOT_REGION=${RIOT_REGION:-americas}
-      - RIOT_PLATFORM=${RIOT_PLATFORM:-br1}
       - DATABASE_PATH=data/koga.db
       - POLLING_INTERVAL_MINUTES=${POLLING_INTERVAL_MINUTES:-5}
       - POLLING_DELAY_MS=${POLLING_DELAY_MS:-1500}

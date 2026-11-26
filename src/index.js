@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, Events, ActivityType, MessageFlags } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const config = require('./utils/config');
@@ -42,7 +42,7 @@ client.once(Events.ClientReady, (c) => {
   initPollingWorker(client);
 
   // Status do bot
-  client.user.setActivity('📜 Estudando suas derrotas...', { type: 4 });
+  client.user.setActivity('📜 Estudando suas derrotas...', { type: ActivityType.Custom });
 });
 
 // Handler de Slash Commands
@@ -62,7 +62,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         description: 'Ocorreu um erro ao executar este comando. Tente novamente.',
         color: 0xe74c3c,
       }],
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     };
     if (interaction.replied || interaction.deferred) {
       await interaction.followUp(reply).catch(() => {});

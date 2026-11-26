@@ -8,7 +8,6 @@ const config = {
   riot: {
     apiKey: process.env.RIOT_API_KEY,
     region: process.env.RIOT_REGION || 'americas',
-    platform: process.env.RIOT_PLATFORM || 'br1',
   },
   database: {
     path: process.env.DATABASE_PATH || 'data/koga.db',
@@ -26,6 +25,17 @@ for (const key of required) {
     console.error(`❌ Variável de ambiente obrigatória não definida: ${key}`);
     process.exit(1);
   }
+}
+
+// O polling usa a expressão cron "*/N * * * *", que só é válida para N entre 1 e 59.
+const interval = config.polling.intervalMinutes;
+if (!Number.isInteger(interval) || interval < 1 || interval > 59) {
+  console.error(`❌ POLLING_INTERVAL_MINUTES inválido (${process.env.POLLING_INTERVAL_MINUTES}). Use um inteiro entre 1 e 59.`);
+  process.exit(1);
+}
+if (!Number.isInteger(config.polling.delayMs) || config.polling.delayMs < 0) {
+  console.error(`❌ POLLING_DELAY_MS inválido (${process.env.POLLING_DELAY_MS}). Use um inteiro maior ou igual a 0.`);
+  process.exit(1);
 }
 
 module.exports = config;

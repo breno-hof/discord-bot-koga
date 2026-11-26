@@ -13,7 +13,7 @@ O sistema segue uma arquitetura modular baseada em serviços, com os seguintes c
 *   **Discord Client:** Interface de comunicação com a API do Discord, responsável por receber comandos e enviar mensagens.
 *   **Command Handler:** Módulo de roteamento que processa os Slash Commands (`/config_koga`, `/vincular`, `/status`).
 *   **Polling Worker:** Serviço em background (agendado via `node-cron`) que verifica periodicamente novas partidas dos jogadores monitorados.
-*   **Riot API Service:** Módulo de integração isolado responsável por todas as chamadas à Riot Games API (ACCOUNT-V1 e MATCH-V5), incluindo tratamento de *rate limits* e erros (403, 404).
+*   **Riot API Service:** Módulo de integração isolado responsável por todas as chamadas à Riot Games API (ACCOUNT-V1 e MATCH-V5), incluindo tratamento de *rate limits* e erros (403, 404, 429).
 *   **History Engine:** O "Core Engine" narrativo do bot. Processa estatísticas brutas e seleciona a analogia histórica mais adequada.
 *   **Database Service:** Camada de abstração de dados utilizando `better-sqlite3` para operações síncronas e de alta performance.
 
@@ -42,25 +42,28 @@ O bot deve operar em múltiplos servidores do Discord simultaneamente, garantind
 A comunicação com a Riot API é crítica e deve ser gerenciada cuidadosamente para evitar bloqueios.
 
 *   **Tradução de Identidade:** O Riot ID (Nome#Tag) fornecido pelo usuário deve ser convertido em um `PUUID` através do endpoint `ACCOUNT-V1`. O `PUUID` é a chave primária imutável usada para todas as consultas subsequentes.
-*   **Telemetria de Partidas:** O endpoint `MATCH-V5` é utilizado para buscar o histórico de partidas e os detalhes estatísticos de cada jogo.
+*   **Telemetria de Partidas:** O endpoint `MATCH-V5` é utilizado para buscar a partida mais recente e seus detalhes estatísticos. Apenas partidas **ranqueadas Solo/Duo** (`queue=420`) são consideradas.
+*   **Ponto de Partida:** Na primeira verificação de um jogador recém-vinculado, o bot apenas grava a partida mais recente como `last_match_id`, sem analisá-la. Assim, derrotas antigas não são comentadas.
+*   **Remakes:** Partidas encerradas por rendição antecipada (`gameEndedInEarlySurrender`) são ignoradas: não geram análise nem entram no histórico.
+*   **Apenas Derrotas:** Vitórias são gravadas em `match_history`, mas só derrotas geram mensagem no canal.
 *   **Gerenciamento de Rate Limit:** O *Polling Worker* deve implementar um *delay* entre as requisições (padrão: 1.500ms) ao iterar sobre a lista de jogadores, garantindo que os limites da API Key não sejam excedidos.
 *   **Tratamento de Erros:**
     *   `404 - Player Not Found`: Deve informar ao usuário que o Riot ID é inválido.
-    *   `403 - Key Expired`: O sistema deve logar o erro criticamente e suspender o polling temporariamente até que a chave seja renovada no `.env`.
-    *   `429 - Rate Limit`: O sistema deve logar o aviso e aguardar o próximo ciclo de polling.
+    *   `403 - Key Expired`: O sistema loga o erro criticamente, interrompe o ciclo atual e suspende o polling. Para retomar, é preciso atualizar `RIOT_API_KEY` e reiniciar o bot.
+    *   `429 - Rate Limit`: O sistema loga o aviso, encerra o ciclo atual e retoma no próximo ciclo de polling. No `/vincular`, o usuário é avisado para tentar de novo.
 
 ### 3.3. O Core Engine: HistoryEngine
 
-O `HistoryEngine` é responsável por transformar dados estatísticos em narrativas irônicas. Ele avalia quatro métricas principais: Duração da partida, KDA (Abates/Mortes/Assistências), Ouro acumulado e Objetivos globais perdidos.
+O `HistoryEngine` é responsável por transformar dados estatísticos em narrativas irônicas. A categoria da analogia é escolhida com base em duas métricas: a duração da partida e o número de mortes. KDA e ouro acumulado aparecem na mensagem, mas não influenciam a escolha.
 
-A lógica de seleção de eventos históricos segue as seguintes diretrizes:
+As condições são avaliadas nesta ordem, e vale a primeira que for verdadeira. Dentro da categoria, o evento histórico e a frase final são sorteados:
 
 | Condição da Partida | Métrica Principal | Analogia Histórica Sugerida | Tom da Mensagem |
 | :--- | :--- | :--- | :--- |
-| **Stomp Rápido** | Duração < 20 min | Rendição súbita, falha logística catastrófica (ex: Batalha de Waterloo, Linha Maginot) | "Deplorável execução", "Colapso estrutural precoce" |
-| **Jogo Longo e Perdido** | Duração > 45 min | Guerra de atrito exaustiva e inútil (ex: Cerco de Leningrado, Batalha de Verdun) | "Anacronismo estratégico", "Desperdício de recursos" |
-| **Muitas Mortes (Feed)** | Mortes > 10 | Táticas de "carne de canhão", falta de preparo (ex: Carga da Brigada Ligeira) | "Estratagema pífio", "Sacrifício sem propósito" |
-| **Derrota Padrão** | Nenhuma das acima | Queda de impérios, erros táticos gerais (ex: Queda de Cartago) | "Inevitabilidade histórica", "Falha de comando" |
+| **Stomp Rápido** | Duração < 20 min | Rendição súbita, colapso precoce (ex: Guerra Anglo-Zanzibari, Capitulação de Detroit) | "Deplorável execução", "Colapso estrutural precoce" |
+| **Jogo Longo e Perdido** | Duração > 45 min | Guerra de atrito exaustiva e inútil (ex: Campanha de Galípoli, Guerra dos Oitenta Anos) | "Anacronismo estratégico", "Desperdício de recursos" |
+| **Muitas Mortes (Feed)** | Mortes > 10 (e duração entre 20 e 45 min) | Táticas de "carne de canhão", falta de preparo (ex: Batalha de Passchendaele) | "Estratagema pífio", "Sacrifício sem propósito" |
+| **Derrota Padrão** | Nenhuma das acima | Queda de impérios, erros táticos gerais (ex: Batalha de Carrhae, Linha Maginot) | "Inevitabilidade histórica", "Falha de comando" |
 
 ### 3.4. Personalidade e Tom de Voz (O Fator Koga)
 
@@ -81,6 +84,8 @@ Todas as mensagens geradas pelo bot devem aderir estritamente à persona de Koga
 | `/config_koga` | Define o canal onde o bot enviará as análises de derrotas. | Administrador |
 | `/vincular [Nome#Tag]` | Adiciona um jogador à lista de monitoramento do servidor atual. | Qualquer usuário |
 | `/status` | Lista todos os jogadores atualmente sendo monitorados no servidor. | Qualquer usuário |
+
+Todos os comandos estão disponíveis apenas em servidores (não em mensagens diretas). Não há comando para remover um jogador do monitoramento.
 
 ## 5. Modelo de Dados
 
@@ -103,7 +108,7 @@ Armazena os jogadores monitorados por servidor.
 | Coluna | Tipo | Descrição |
 | :--- | :--- | :--- |
 | `id` | INTEGER (PK) | ID auto-incrementado |
-| `puuid` | TEXT | PUUID do jogador (Riot) |
+| `puuid` | TEXT | PUUID do jogador (Riot). Único por servidor: `UNIQUE(puuid, guild_id)` |
 | `riot_id_tag` | TEXT | Riot ID legível (Nome#Tag) |
 | `last_match_id` | TEXT | ID da última partida processada |
 | `guild_id` | TEXT (FK) | Referência ao servidor |
@@ -116,8 +121,8 @@ Armazena o histórico de partidas analisadas.
 | Coluna | Tipo | Descrição |
 | :--- | :--- | :--- |
 | `id` | INTEGER (PK) | ID auto-incrementado |
-| `match_id` | TEXT | ID da partida (Riot) |
-| `puuid` | TEXT (FK) | PUUID do jogador |
+| `match_id` | TEXT | ID da partida (Riot). Único por jogador e servidor: `UNIQUE(match_id, puuid, guild_id)` |
+| `puuid` | TEXT (FK) | PUUID do jogador. FK composta `(puuid, guild_id)` → `tracked_players` |
 | `guild_id` | TEXT (FK) | ID do servidor |
 | `win` | INTEGER | 1 = vitória, 0 = derrota |
 | `duration` | INTEGER | Duração em segundos |
@@ -130,10 +135,8 @@ Armazena o histórico de partidas analisadas.
 
 ## 6. Planejamento de Implantação
 
-O projeto segue os padrões da organização `devyor-dot-fun`:
-
-1.  **Repositório:** `devyor-dot-fun/discord-bot-koga` (privado).
+1.  **Repositório:** `breno-hof/discord-bot-koga` (público).
 2.  **Infraestrutura:** Docker + `docker-compose` para conteinerização.
-3.  **CI/CD:** GitHub Actions para build da imagem Docker e push para GHCR.
+3.  **CI/CD:** GitHub Actions para build da imagem Docker e push para o GHCR (`ghcr.io/breno-hof/discord-bot-koga`).
 4.  **Deploy:** Hostinger Docker Manager API ao fazer push na branch `main`.
 5.  **Variáveis de Ambiente:** Gerenciamento via `.env` local e GitHub Secrets em produção.

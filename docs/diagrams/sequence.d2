@@ -1,33 +1,31 @@
-direction: right
+shape: sequence_diagram
 
-actor User
-participant Discord
-participant Koga Bot
-participant SQLite
-participant Riot API
+User
+Discord
+Koga Bot
+SQLite
+Riot API
 
-User -> Discord: /vincular Nome#Tag
-Discord -> Koga Bot: InteractionCreate (vincular)
-Koga Bot -> Riot API: GET /riot/account/v1/accounts/by-riot-id/Nome/Tag
-Riot API --> Koga Bot: PUUID
-Koga Bot -> SQLite: INSERT INTO tracked_players (puuid, guild_id)
-SQLite --> Koga Bot: Success
-Koga Bot --> Discord: Embed (Jogador vinculado)
-Discord --> User: Mensagem de sucesso
+vincular: "/vincular Nome#Tag" {
+  User -> Discord: /vincular Nome#Tag
+  Discord -> Koga Bot: InteractionCreate (vincular)
+  Koga Bot -> Riot API: GET /riot/account/v1/accounts/by-riot-id/{nome}/{tag}
+  Riot API -> Koga Bot: PUUID {style.stroke-dash: 3}
+  Koga Bot -> SQLite: INSERT OR IGNORE INTO tracked_players
+  SQLite -> Koga Bot: OK / já existia {style.stroke-dash: 3}
+  Koga Bot -> Discord: Embed (vinculado ou já monitorado) {style.stroke-dash: 3}
+  Discord -> User: Resposta efêmera {style.stroke-dash: 3}
+}
 
-note: A cada 5 minutos
-Koga Bot -> SQLite: SELECT * FROM tracked_players
-SQLite --> Koga Bot: List of Players
-loop For each player
-  Koga Bot -> Riot API: GET /lol/match/v5/matches/by-puuid/puuid/ids
-  Riot API --> Koga Bot: Match IDs
-  alt New Match Found
-    Koga Bot -> Riot API: GET /lol/match/v5/matches/matchId
-    Riot API --> Koga Bot: Match Data
-    Koga Bot -> Koga Bot: HistoryEngine.analyze(Match Data)
-    Koga Bot -> SQLite: SELECT notification_channel_id FROM guild_configs
-    SQLite --> Koga Bot: Channel ID
-    Koga Bot -> Discord: Send Message (Análise Histórica Irônica)
-    Koga Bot -> SQLite: UPDATE tracked_players SET last_match_id = matchId
-  end
-end
+polling: "Polling (a cada POLLING_INTERVAL_MINUTES)" {
+  Koga Bot -> SQLite: SELECT tracked_players JOIN guild_configs (com canal definido)
+  SQLite -> Koga Bot: Jogadores + canal {style.stroke-dash: 3}
+  Koga Bot -> Riot API: "GET /lol/match/v5/matches/by-puuid/{puuid}/ids?queue=420&count=1"
+  Riot API -> Koga Bot: ID da última partida {style.stroke-dash: 3}
+  Koga Bot -> SQLite: "Sem last_match_id: só grava o ponto de partida"
+  Koga Bot -> Riot API: "Partida nova: GET /lol/match/v5/matches/{matchId}"
+  Riot API -> Koga Bot: Dados da partida {style.stroke-dash: 3}
+  Koga Bot -> SQLite: UPDATE last_match_id; INSERT match_history (exceto remake)
+  Koga Bot -> Koga Bot: "Derrota: HistoryEngine.analyze()"
+  Koga Bot -> Discord: Envia embed no canal configurado
+}

@@ -28,7 +28,7 @@ async function getPuuidByRiotId(gameName, tagLine) {
 }
 
 /**
- * Busca os IDs das últimas partidas de um jogador.
+ * Busca os IDs das últimas partidas ranqueadas Solo/Duo (queue 420) de um jogador.
  * @param {string} puuid
  * @param {number} count - Quantidade de partidas (padrão: 1)
  * @returns {Promise<string[]>}
@@ -71,6 +71,8 @@ function extractPlayerStats(matchData, puuid) {
   return {
     matchId: matchData.metadata.matchId,
     win: participant.win,
+    // Remake (rendição antecipada): não conta como derrota
+    isRemake: Boolean(participant.gameEndedInEarlySurrender),
     champion: participant.championName,
     kills: participant.kills,
     deaths: participant.deaths,

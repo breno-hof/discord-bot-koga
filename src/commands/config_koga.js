@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, InteractionContextType, MessageFlags } = require('discord.js');
 const { upsertGuildConfig } = require('../database/queries');
 
 module.exports = {
@@ -12,7 +12,8 @@ module.exports = {
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true)
     )
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .setContexts(InteractionContextType.Guild),
 
   async execute(interaction) {
     const channel = interaction.options.getChannel('canal');
@@ -26,7 +27,7 @@ module.exports = {
         color: 0x2b2d31,
         footer: { text: 'Koga — Analista de Estratégia e Historiador do Fracasso' },
       }],
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   },
 };

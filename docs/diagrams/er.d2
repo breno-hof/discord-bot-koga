@@ -15,21 +15,25 @@ tracked_players: {
   puuid: TEXT {constraint: unique}
   riot_id_tag: TEXT
   last_match_id: TEXT
-  guild_id: TEXT {constraint: foreign_key}
+  guild_id: TEXT {constraint: [foreign_key; unique]}
   created_at: DATETIME
 }
 
 match_history: {
   shape: sql_table
   id: INTEGER {constraint: primary_key}
-  match_id: TEXT
-  puuid: TEXT {constraint: foreign_key}
-  win: BOOLEAN
+  match_id: TEXT {constraint: unique}
+  puuid: TEXT {constraint: [foreign_key; unique]}
+  guild_id: TEXT {constraint: [foreign_key; unique]}
+  win: INTEGER
   duration: INTEGER
-  kda: TEXT
+  champion: TEXT
+  kills: INTEGER
+  deaths: INTEGER
+  assists: INTEGER
   gold_earned: INTEGER
   analyzed_at: DATETIME
 }
 
 guild_configs.guild_id -> tracked_players.guild_id: 1..N
-tracked_players.puuid -> match_history.puuid: 1..N
+tracked_players.puuid -> match_history.puuid: "1..N (FK composta: puuid + guild_id)"

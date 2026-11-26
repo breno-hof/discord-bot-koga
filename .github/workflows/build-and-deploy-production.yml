@@ -76,7 +76,6 @@ jobs:
           DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
           RIOT_REGION: ${{ vars.RIOT_REGION }}
-          RIOT_PLATFORM: ${{ vars.RIOT_PLATFORM }}
           POLLING_INTERVAL_MINUTES: ${{ vars.POLLING_INTERVAL_MINUTES }}
           POLLING_DELAY_MS: ${{ vars.POLLING_DELAY_MS }}
         run: |

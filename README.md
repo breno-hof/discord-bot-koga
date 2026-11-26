@@ -47,6 +47,8 @@ src/
 | `/vincular Nome#Tag` | Adiciona um jogador ao monitoramento | Qualquer usuário |
 | `/status` | Lista jogadores monitorados no servidor | Qualquer usuário |
 
+Os comandos só funcionam dentro de servidores (não em DM). O bot acompanha apenas partidas **ranqueadas Solo/Duo** e só publica análise de **derrotas**. Remakes são ignorados, e a primeira verificação após o `/vincular` apenas marca a partida mais recente como ponto de partida, sem analisar jogos antigos.
+
 ---
 
 ## Configuração
@@ -60,7 +62,7 @@ src/
 ### 2. Instalação
 
 ```bash
-git clone https://github.com/devyor-dot-fun/discord-bot-koga.git
+git clone https://github.com/breno-hof/discord-bot-koga.git
 cd discord-bot-koga
 npm install
 ```
@@ -78,10 +80,9 @@ cp .env.example .env
 | `DISCORD_TOKEN` | Token do bot Discord | ✅ |
 | `DISCORD_CLIENT_ID` | Client ID da aplicação Discord | ✅ |
 | `RIOT_API_KEY` | Chave da Riot Games API | ✅ |
-| `RIOT_REGION` | Região para MATCH-V5 (`americas`, `europe`, `asia`) | Padrão: `americas` |
-| `RIOT_PLATFORM` | Plataforma para lookups (`br1`, `na1`, `euw1`) | Padrão: `br1` |
+| `RIOT_REGION` | Roteamento regional para ACCOUNT-V1 e MATCH-V5 (`americas`, `europe`, `asia`). BR usa `americas` | Padrão: `americas` |
 | `DATABASE_PATH` | Caminho do arquivo SQLite | Padrão: `data/koga.db` |
-| `POLLING_INTERVAL_MINUTES` | Intervalo do polling em minutos | Padrão: `5` |
+| `POLLING_INTERVAL_MINUTES` | Intervalo do polling em minutos (inteiro de 1 a 59) | Padrão: `5` |
 | `POLLING_DELAY_MS` | Delay entre requisições (rate limit) | Padrão: `1500` |
 
 ### 4. Registrar Slash Commands
@@ -105,14 +106,14 @@ npm start
 ## Deploy com Docker
 
 ```bash
-# Build e execução local
-docker-compose up -d
+# Build e execução local (usa o arquivo .env)
+docker compose up -d --build
 
 # Apenas build
 docker build -t discord-bot-koga .
 ```
 
-O deploy em produção é automatizado via **GitHub Actions** ao fazer push na branch `main`, utilizando o Hostinger Docker Manager API.
+O deploy em produção é automatizado via **GitHub Actions** ao fazer push na branch `main`: a imagem é publicada em `ghcr.io/breno-hof/discord-bot-koga` e implantada pela API do Hostinger Docker Manager usando `infra/prod/docker-compose.yml`.
 
 ---
 
@@ -136,6 +137,8 @@ Consulte a [documentação completa de regras de negócio](./docs/business_rules
 | `RIOT_API_KEY` | Chave da Riot Games API |
 | `HOSTINGER_API_TOKEN` | Token da API Hostinger |
 | `HOSTINGER_VPS_ID` | ID do VPS na Hostinger |
+
+Variáveis opcionais (`vars`) do ambiente `production`: `RIOT_REGION`, `POLLING_INTERVAL_MINUTES` e `POLLING_DELAY_MS`. Se não forem definidas, valem os padrões acima.
 
 ---
 

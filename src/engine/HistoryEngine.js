@@ -33,11 +33,11 @@ const HISTORICAL_EVENTS = {
     },
     {
       event: 'Batalha de Agincourt (1415)',
-      description: 'A cavalaria francesa, pesada e arrogante, avançou por um campo de lama apenas para ser massacrada por arqueiros galeses em posição estática.',
+      description: 'A cavalaria francesa, pesada e arrogante, avançou por um campo de lama apenas para ser massacrada por arqueiros ingleses e galeses em posição estática.',
       lesson: 'A pressa em morrer é a única coisa que superou sua falta de visão de mapa nesta partida.',
     },
     {
-      event: 'O Grande Emigre (1792)',
+      event: 'Os Emigrados e a Batalha de Valmy (1792)',
       description: 'A aristocracia francesa achou que o exército prussiano resolveria seus problemas em dias. Foram varridos da história antes que pudessem arrumar as malas.',
       lesson: 'Esperar que terceiros salvem sua rota é um anacronismo tático que a história já puniu mil vezes.',
     },
@@ -53,7 +53,7 @@ const HISTORICAL_EVENTS = {
     },
     {
       event: 'Corte Marcial de William Hull (1814)',
-      description: 'Hull foi o único general americano condenado à morte por covardia. Ele não perdeu por falta de meios, mas por uma paralisia absoluta da vontade diante do inimigo.',
+      description: 'Hull foi condenado à morte por covardia, sendo depois perdoado pelo presidente Madison. Ele não perdeu por falta de meios, mas por uma paralisia absoluta da vontade diante do inimigo.',
       lesson: 'Sua hesitação em apertar qualquer botão nesta partida foi tão paralisante que Hull pareceria um herói de guerra ao seu lado.',
     },
   ],
@@ -86,7 +86,7 @@ const HISTORICAL_EVENTS = {
       lesson: 'O seu "late game" é apenas um epílogo prolongado de uma tragédia que todos os outros já previram aos 10 minutos.',
     },
     {
-      event: 'Batalha de Kandahar (2001-2021)',
+      event: 'Guerra do Afeganistão (2001–2021)',
       description: 'Vinte anos de ocupação tática para um colapso em menos de duas semanas. O tempo não cura a falta de uma estratégia de saída.',
       lesson: 'Arrastar o jogo por 50 minutos para perder em uma luta mal feita no Baron... você é um historiador nato do masoquismo.',
     },
@@ -111,7 +111,7 @@ const HISTORICAL_EVENTS = {
   CANNON_FODDER: [
     {
       event: 'Massacre de Katyn (1940)',
-      description: 'Milhares de oficiais foram eliminados sistematicamente por um erro de julgamento sobre quem era realmente o inimigo. Uma eliminação limpa, cruel e absoluta.',
+      description: 'Cerca de 22 mil prisioneiros poloneses, em sua maioria oficiais, foram executados pela polícia secreta soviética. Uma eliminação metódica, cruel e absoluta.',
       lesson: 'Sua tela cinza é o gráfico mais estável desta partida. Uma consistência admirável na arte de morrer.',
     },
     {
@@ -125,7 +125,7 @@ const HISTORICAL_EVENTS = {
       lesson: 'Acreditar que sua build "off-meta" te tornaria invencível é o tipo de pensamento mágico que eu esperava de um camponês do século XIX, não de você.',
     },
     {
-      event: 'A Carga dos Três Reis (1578)',
+      event: 'Batalha de Alcácer-Quibir (1578)',
       description: 'D. Sebastião desapareceu no deserto do Marrocos levando consigo toda a nobreza de Portugal. Uma geração inteira perdida por um delírio de grandeza.',
       lesson: 'Sua jornada solo pela jungle inimiga sem visão foi o nosso "Alcácer-Quibir". Só falta agora esperarmos o seu retorno em uma manhã de nevoeiro.',
     },
@@ -160,7 +160,7 @@ const HISTORICAL_EVENTS = {
     },
     {
       event: 'Batalha de Carrhae (53 a.C.)',
-      description: 'Crasso, o homem mais rico de Roma, achou que poderia comprar a vitória contra os partos. Acabou com ouro derretido despejado em sua garganta.',
+      description: 'Crasso, o homem mais rico de Roma, achou que poderia comprar a vitória contra os partos. Segundo a lenda, acabou com ouro derretido despejado em sua garganta.',
       lesson: 'Ter 10k de ouro acumulado e não gastar em itens úteis? Crasso pelo menos teve a decência de morrer com o ouro.',
     },
     {
@@ -199,8 +199,8 @@ const HISTORICAL_EVENTS = {
       lesson: 'Escolher a pior luta no pior lugar possível? Você não é um jogador, você é um guia turístico para o abismo.',
     },
     {
-      event: 'O Escândalo do Caminho de Ferro do Mar do Sul (1720)',
-      description: 'Uma bolha especulativa onde todos investiram cegamente em algo que não existia, esperando riquezas infinitas. O colapso destruiu a economia britânica e a sanidade de muitos.',
+      event: 'A Bolha dos Mares do Sul (1720)',
+      description: 'Uma bolha especulativa onde todos investiram cegamente em algo que não existia, esperando riquezas infinitas. O colapso arruinou milhares de investidores e a sanidade de muitos.',
       lesson: 'Sua confiança nessa jogada foi a maior bolha especulativa desde 1720. O colapso foi rápido, doloroso e previsível para qualquer um com meio cérebro.',
     },
     {
@@ -225,7 +225,7 @@ const HISTORICAL_EVENTS = {
     },
     {
       event: 'A Expedição de Sir John Franklin (1845)',
-      description: 'Dois navios partiram para o Ártico com suprimentos para anos e tecnologia de ponta. Foram encontrados décadas depois, presos no gelo, com tripulantes que recorreram ao canibalismo.',
+      description: 'Dois navios partiram para o Ártico com suprimentos para anos e tecnologia de ponta. Ficaram presos no gelo, ninguém voltou, e há indícios de que os tripulantes recorreram ao canibalismo. Os navios só foram encontrados no século XXI.',
       lesson: 'Você começou com recursos e esperança, mas terminou isolado, sem recursos e provavelmente querendo morder seus próprios aliados.',
     },
     {
@@ -235,7 +235,7 @@ const HISTORICAL_EVENTS = {
     },
     {
       event: 'A Batalha de Maratona (490 a.C.)',
-      description: 'Os persas desembarcaram com arrogância imperatriz, apenas para serem encurralados pelos atenienses contra o mar. A retirada foi um caos de afogamentos e pânico.',
+      description: 'Os persas desembarcaram com arrogância imperial, apenas para serem encurralados pelos atenienses contra o mar. A retirada foi um caos de afogamentos e pânico.',
       lesson: 'Sua retirada foi tão desorganizada que eu não sabia se você estava tentando fugir ou se suicidar coletivamente.',
     },
     {

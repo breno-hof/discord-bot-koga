@@ -1,11 +1,12 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, InteractionContextType, MessageFlags } = require('discord.js');
 const { getPuuidByRiotId } = require('../services/RiotApiService');
-const { addTrackedPlayer, getTrackedPlayersByGuild } = require('../database/queries');
+const { addTrackedPlayer } = require('../database/queries');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('vincular')
     .setDescription('Adiciona um jogador de LoL à lista de monitoramento deste servidor.')
+    .setContexts(InteractionContextType.Guild)
     .addStringOption(option =>
       option
         .setName('riot_id')
@@ -14,9 +15,9 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-    const riotIdInput = interaction.options.getString('riot_id');
+    const riotIdInput = interaction.options.getString('riot_id').trim();
 
     // Validar formato Nome#Tag
     const parts = riotIdInput.split('#');
@@ -36,7 +37,17 @@ module.exports = {
       const accountData = await getPuuidByRiotId(gameName, tagLine);
       const riotIdTag = `${accountData.gameName}#${accountData.tagLine}`;
 
-      addTrackedPlayer(accountData.puuid, riotIdTag, interaction.guildId);
+      const added = addTrackedPlayer(accountData.puuid, riotIdTag, interaction.guildId);
+
+      if (!added) {
+        return interaction.editReply({
+          embeds: [{
+            title: 'ℹ️ Jogador Já Monitorado',
+            description: `**${riotIdTag}** já está na lista de monitoramento deste servidor.`,
+            color: 0x95a5a6,
+          }],
+        });
+      }
 
       await interaction.editReply({
         embeds: [{
@@ -53,6 +64,15 @@ module.exports = {
             title: '🔍 Jogador Não Encontrado',
             description: `Não foi possível encontrar o jogador **${riotIdInput}**.\n\nVerifique se o Riot ID está correto e tente novamente.`,
             color: 0xe74c3c,
+          }],
+        });
+      }
+      if (error.message === 'RIOT_RATE_LIMIT') {
+        return interaction.editReply({
+          embeds: [{
+            title: '⏳ Muitas Requisições',
+            description: 'A Riot API está limitando as requisições no momento. Tente novamente em alguns instantes.',
+            color: 0xe67e22,
           }],
         });
       }

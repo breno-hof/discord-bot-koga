@@ -31,10 +31,13 @@ function addTrackedPlayer(puuid, riotIdTag, guildId) {
     INSERT OR IGNORE INTO guild_configs (guild_id) VALUES (?)
   `).run(guildId);
 
-  db.prepare(`
+  const result = db.prepare(`
     INSERT OR IGNORE INTO tracked_players (puuid, riot_id_tag, guild_id)
     VALUES (?, ?, ?)
   `).run(puuid, riotIdTag, guildId);
+
+  // true = jogador novo; false = já estava sendo monitorado neste servidor
+  return result.changes > 0;
 }
 
 function getTrackedPlayersByGuild(guildId) {

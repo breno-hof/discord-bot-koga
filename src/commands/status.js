@@ -1,10 +1,11 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, InteractionContextType, MessageFlags } = require('discord.js');
 const { getTrackedPlayersByGuild, getGuildConfig } = require('../database/queries');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('status')
-    .setDescription('Lista os jogadores sendo monitorados neste servidor.'),
+    .setDescription('Lista os jogadores sendo monitorados neste servidor.')
+    .setContexts(InteractionContextType.Guild),
 
   async execute(interaction) {
     const players = getTrackedPlayersByGuild(interaction.guildId);
@@ -17,7 +18,7 @@ module.exports = {
           description: 'Nenhum jogador está sendo monitorado neste servidor.\n\nUse `/vincular Nome#Tag` para adicionar jogadores.',
           color: 0x95a5a6,
         }],
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -49,7 +50,7 @@ module.exports = {
           text: `${players.length} jogador(es) sob vigilância de Koga`,
         },
       }],
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   },
 };

@@ -2,61 +2,58 @@ direction: right
 
 Discord: {
   shape: cylinder
-
 }
 
 Riot Games API: {
   shape: cloud
-
 }
 
 Koga Bot (Node.js): {
   shape: package
-  
+
   Discord Client: {
     shape: rectangle
   }
-  
+
   Command Handler: {
     shape: rectangle
   }
-  
+
   Polling Worker: {
     shape: rectangle
   }
-  
+
   Riot API Service: {
     shape: rectangle
   }
-  
+
   History Engine: {
     shape: rectangle
   }
-  
+
   Database Service: {
     shape: rectangle
   }
-  
+
   Discord Client -> Command Handler: Slash Commands
-  Command Handler -> Database Service: Config/Vincular
-  Command Handler -> History Engine: /comparativo
-  
-  Polling Worker -> Database Service: Get Tracked Players
-  Polling Worker -> Riot API Service: Check New Matches
-  Riot API Service -> History Engine: Match Data
-  History Engine -> Discord Client: Send Notification
+  Command Handler -> Database Service: /config_koga, /vincular, /status
+  Command Handler -> Riot API Service: /vincular (Riot ID -> PUUID)
+
+  Polling Worker -> Database Service: Jogadores monitorados / histórico
+  Polling Worker -> Riot API Service: Novas partidas
+  Polling Worker -> History Engine: Estatísticas da derrota
+  Polling Worker -> Discord Client: Envia embed da análise
 }
 
 SQLite Database: {
   shape: cylinder
-
 }
 
-Discord -> Koga Bot.Discord Client: Webhooks/Events
-Koga Bot.Discord Client -> Discord: Messages/Embeds
+Discord -> Koga Bot (Node.js).Discord Client: Gateway (eventos)
+Koga Bot (Node.js).Discord Client -> Discord: Mensagens/Embeds
 
-Koga Bot.Riot API Service -> Riot Games API: HTTP GET (ACCOUNT-V1, MATCH-V5)
-Riot Games API -> Koga Bot.Riot API Service: JSON Data
+Koga Bot (Node.js).Riot API Service -> Riot Games API: HTTP GET (ACCOUNT-V1, MATCH-V5)
+Riot Games API -> Koga Bot (Node.js).Riot API Service: JSON
 
-Koga Bot.Database Service -> SQLite Database: Read/Write
-SQLite Database -> Koga Bot.Database Service: Results
+Koga Bot (Node.js).Database Service -> SQLite Database: Read/Write
+SQLite Database -> Koga Bot (Node.js).Database Service: Results
